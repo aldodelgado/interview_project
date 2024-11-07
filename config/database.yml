@@ -23,7 +23,8 @@ default: &default
 
 development:
   <<: *default
-  database: interview_project_development
+  database: interview_project_dev
+  url: <%= ENV["DATABASE_URL"] || 'interview_project_dev' %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
