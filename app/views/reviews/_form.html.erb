@@ -2,7 +2,7 @@
   <p>You have already reviewed this book.</p>
 <% elsif user_signed_in? %>
   <h3>Add a Review</h3>
-  <%= form_with(model: [book, book.reviews.build], local: true) do |form| %>
+  <%= form_with(model: [book, Review.new], local: true) do |form| %>
     <div class="mb-3">
       <%= form.label :rating %>
       <%= form.number_field :rating, in: 1..5, step: 1, class: "form-control", required: true %>

@@ -13,7 +13,6 @@ class ReviewsController < ApplicationController
       redirect_to book_path(@book)
     else
       flash.now[:alert] = @review.errors.full_messages.join(", ")
-      @new_review = @review
       render 'books/show'
     end
   end
