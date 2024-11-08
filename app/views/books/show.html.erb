@@ -20,7 +20,7 @@
 </div>
 
 <%= render 'reviews/form', book: @book %>
-<%= render partial: 'reviews/review', collection: @book.reviews, as: :review, locals: { book: @book } %>
+<%= render 'reviews/reviews', book: @book %>
 
 <div class="mt-4">
   <%= link_to 'Back to Books', books_path, class: 'btn btn-secondary' %>
