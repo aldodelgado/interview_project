@@ -22,6 +22,10 @@
 #
 class Review < ApplicationRecord
   belongs_to :user
-  belongs_to :book
+  belongs_to :book, touch: true
+
+  validates :user, presence: true
+  validates :content, presence: true
   validates :rating, inclusion: { in: 1..5 }
+  validates :user_id, uniqueness: { scope: :book_id, message: "You have already reviewed this book" }
 end
