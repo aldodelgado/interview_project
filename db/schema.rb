@@ -22,6 +22,9 @@ ActiveRecord::Schema.define(version: 2024_11_07_221731) do
     t.string "isbn"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["author"], name: "index_books_on_author"
+    t.index ["isbn"], name: "index_books_on_isbn", unique: true
+    t.index ["title"], name: "index_books_on_title"
   end
 
   create_table "reviews", force: :cascade do |t|
