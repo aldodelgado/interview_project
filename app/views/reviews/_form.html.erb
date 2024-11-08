@@ -1,0 +1,20 @@
+<% if user_signed_in? && book.reviews.where(user: current_user).exists? %>
+  <p>You have already reviewed this book.</p>
+<% elsif user_signed_in? %>
+  <h3>Add a Review</h3>
+  <%= form_with(model: [book, book.reviews.build], local: true) do |form| %>
+    <div class="mb-3">
+      <%= form.label :rating %>
+      <%= form.number_field :rating, in: 1..5, step: 1, class: "form-control", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :content %>
+      <%= form.text_area :content, class: "form-control", required: true %>
+    </div>
+
+    <%= form.submit "Add Review", class: "btn btn-primary" %>
+  <% end %>
+<% else %>
+  <p>Please <%= link_to 'log in', new_user_session_path %> to add a review.</p>
+<% end %>

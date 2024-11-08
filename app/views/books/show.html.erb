@@ -1,0 +1,27 @@
+<%= render 'shared/breadcrumbs' %>
+
+<div class="card mb-4">
+  <div class="row g-0">
+    <div class="col-md-4 d-flex align-items-center justify-content-center">
+      <%= image_tag @book.cover_image_url, alt: @book.title, class: "img-fluid", style: "max-height: 300px; max-width: 100%;" %>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h1><%= @book.title %></h1>
+        <p><strong>Author:</strong> <%= @book.author %></p>
+        <p><strong>ISBN:</strong> <%= @book.isbn %></p>
+        <p><strong>Publication Year:</strong> <%= @book.publication_year %></p>
+        <% cache ["book", @book.id, @book.updated_at, "average_rating"] do %>
+          <p><strong>Average Rating:</strong> <%= @book.average_rating %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render 'reviews/form', book: @book %>
+<%= render partial: 'reviews/review', collection: @book.reviews, as: :review, locals: { book: @book } %>
+
+<div class="mt-4">
+  <%= link_to 'Back to Books', books_path, class: 'btn btn-secondary' %>
+</div>

@@ -1,0 +1,18 @@
+<%= render 'shared/breadcrumbs' %>
+
+<h1>Edit Review for <%= @book.title %></h1>
+
+<%= form_with(model: [@book, @review], local: true) do |form| %>
+  <div class="mb-3">
+    <%= form.label :rating %>
+    <%= form.number_field :rating, in: 1..5, step: 1, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :content %>
+    <%= form.text_area :content, class: "form-control", required: true %>
+  </div>
+
+  <%= form.submit "Update Review", class: "btn btn-primary" %>
+  <%= link_to 'Cancel', book_path(@book), class: 'btn btn-secondary' %>
+<% end %>

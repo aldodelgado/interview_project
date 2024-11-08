@@ -1,0 +1,46 @@
+<%= form_with(model: @book, local: true, class: "needs-validation") do |f| %>
+
+  <div class="mb-3">
+    <%= f.label :title, class: "form-label" %>
+    <%= f.text_field :title, class: "form-control #{'is-invalid' if @book.errors[:title].any?}", required: true, placeholder: "Enter book title", minlength: 3 %>
+    <% if @book.errors[:title].any? %>
+      <div class="invalid-feedback">
+        <%= @book.errors[:title].join(", ") %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :author, class: "form-label" %>
+    <%= f.text_field :author, class: "form-control #{'is-invalid' if @book.errors[:author].any?}", required: true, placeholder: "Enter author name", minlength: 3 %>
+    <% if @book.errors[:author].any? %>
+      <div class="invalid-feedback">
+        <%= @book.errors[:author].join(", ") %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :publication_year, class: "form-label" %>
+    <%= f.number_field :publication_year, class: "form-control #{'is-invalid' if @book.errors[:publication_year].any?}", required: true, min: 1000, max: Date.current.year, placeholder: "e.g., 2023" %>
+    <% if @book.errors[:publication_year].any? %>
+      <div class="invalid-feedback">
+        <%= @book.errors[:publication_year].join(", ") %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :isbn, class: "form-label" %>
+    <%= f.text_field :isbn, class: "form-control #{'is-invalid' if @book.errors[:isbn].any?}", required: true, pattern: "\\d{1,3}-?\\d{1,5}-?\\d{1,7}-?\\d{1,7}-?[\\dX]", title: "Enter a valid ISBN-10 or ISBN-13, with or without hyphens" %>
+    <small class="form-text text-muted">Must be a valid ISBN-10 of ISBN-13 number.</small>
+    <% if @book.errors[:isbn].any? %>
+      <div class="invalid-feedback">
+        <%= @book.errors[:isbn].join(", ") %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= f.submit "Add Book", class: "btn btn-primary" %>
+  <%= link_to 'Cancel', books_path, class: 'btn btn-secondary' %>
+<% end %>

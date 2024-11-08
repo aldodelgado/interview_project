@@ -1,0 +1,27 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Home', root_path %></li>
+    <% if controller_name == 'books' %>
+      <% if action_name == 'index' %>
+        <li class="breadcrumb-item active" aria-current="page">Books</li>
+      <% else %>
+        <li class="breadcrumb-item"><%= link_to 'Books', books_path %></li>
+      <% end %>
+
+      <% if action_name == 'show' && @book %>
+        <li class="breadcrumb-item active" aria-current="page"><%= @book.title %></li>
+      <% elsif action_name == 'new' %>
+        <li class="breadcrumb-item active" aria-current="page">Add New Book</li>
+      <% end %>
+
+    <% elsif controller_name == 'reviews' %>
+      <li class="breadcrumb-item"><%= link_to 'Books', books_path %></li>
+      <li class="breadcrumb-item"><%= link_to @book.title, book_path(@book) %></li>
+      <% if action_name == 'edit' %>
+        <li class="breadcrumb-item active" aria-current="page">Edit Review</li>
+      <% elsif action_name == 'new' %>
+        <li class="breadcrumb-item active" aria-current="page">Add Review</li>
+      <% end %>
+    <% end %>
+  </ol>
+</nav>
